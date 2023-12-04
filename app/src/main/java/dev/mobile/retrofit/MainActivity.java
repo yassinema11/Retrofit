@@ -34,10 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                             selectedFragment = new add();
                         }
 
-                        if (item.getItemId() == R.id.list)
-                        {
-                            selectedFragment = new List();
-                        }
+
 
 
 

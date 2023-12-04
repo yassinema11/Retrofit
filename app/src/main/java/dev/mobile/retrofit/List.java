@@ -4,60 +4,76 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link List#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class List extends Fragment {
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class List extends Fragment
+{
+    RecyclerView recyclerViewUser;
+    RecyclerView.LayoutManager layoutManager;
 
     public List() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment List.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static List newInstance(String param1, String param2) {
-        List fragment = new List();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false);
+        final View v = inflater.inflate(R.layout.fragment_list, container, false);
+        String URL = getArguments().getString("url", "");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiHandler api = retrofit.create(ApiHandler.class);
+        Call<List<User>> userListCall = api.getAllUsers();
+
+        userListCall.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Response<List<User>> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    List<User> userList = response.body();
+
+                    if (userList != null) {
+                        recyclerViewUser = v.findViewById(R.id.user_recycleview);
+                        layoutManager = new LinearLayoutManager(requireContext());
+                        recyclerViewUser.setLayoutManager(layoutManager);
+
+                        UserAdapter userAdapter = new UserAdapter(requireContext(), userList);
+                        recyclerViewUser.setAdapter(userAdapter);
+
+                        // Separate each row with a divider
+                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
+                        recyclerViewUser.addItemDecoration(dividerItemDecoration);
+                    } else {
+                        Toast.makeText(requireContext(), "Response body is null", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(requireContext(), "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return v;
     }
 }
