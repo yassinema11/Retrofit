@@ -34,10 +34,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                             selectedFragment = new add();
                         }
 
+                        if (item.getItemId() == R.id.addfrag)
+                        {
+                            selectedFragment = new add();
+                        }
+
+                        if (item.getItemId() == R.id.addfrag)
+                        {
+                            selectedFragment = new add();
+                        }
+
 
                         if (selectedFragment != null)
                         {
-                            String URL="http://172.16.12.25:80/";
+                            String URL="http://172.16.13.122:80/";
                             Bundle bundle = new Bundle();
 
                             bundle.putString("url", URL);

@@ -28,7 +28,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position)
+    {
         User user = userList.get(position);
         holder.bind(user);
     }
@@ -41,16 +42,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     static class UserViewHolder extends RecyclerView.ViewHolder
     {
 
-        private TextView nameTextView;
-        private TextView usernameTextView;
-        private TextView emailTextView;
+        private TextView nameTextView,usernameTextView,emailTextView,passTextView;
+
 
         public UserViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.nameTextView);
-            usernameTextView = itemView.findViewById(R.id.usernameTextView);
-            emailTextView = itemView.findViewById(R.id.emailTextView);
+            nameTextView = itemView.findViewById(R.id.txtnom);
+            usernameTextView = itemView.findViewById(R.id.txtuser);
+            emailTextView = itemView.findViewById(R.id.txtemail);
+            passTextView = itemView.findViewById(R.id.txtpass);
+
         }
 
         public void bind(User user)
@@ -58,6 +60,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             nameTextView.setText(user.getName());
             usernameTextView.setText(user.getUsername());
             emailTextView.setText(user.getEmail());
+            passTextView.setText(user.getPassword());
+
         }
     }
 }
