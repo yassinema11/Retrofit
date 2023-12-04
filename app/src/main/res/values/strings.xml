@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Retrofit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_user">ADD</string>
+    <string name="update_user">UPDATE</string>
+    <string name="list_user">LIST</string>
+    <string name="del_user">DELETE</string>
+
+
+</resources>
