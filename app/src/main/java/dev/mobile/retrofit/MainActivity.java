@@ -34,15 +34,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                             selectedFragment = new add();
                         }
 
-                        if (item.getItemId() == R.id.addfrag)
+                        if (item.getItemId() == R.id.list)
                         {
-                            selectedFragment = new add();
+                            selectedFragment = new List();
                         }
 
-                        if (item.getItemId() == R.id.addfrag)
-                        {
-                            selectedFragment = new add();
-                        }
 
 
                         if (selectedFragment != null)
