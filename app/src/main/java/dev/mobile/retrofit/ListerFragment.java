@@ -1,3 +1,5 @@
+// ListerFragment.java
+
 package dev.mobile.retrofit;
 
 import android.os.Bundle;
@@ -19,8 +21,8 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-
-public class ListerFragment extends Fragment {
+public class ListerFragment extends Fragment
+{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -45,7 +47,8 @@ public class ListerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View v = inflater.inflate(R.layout.fragment_lister, container, false);
 
         recyclerViewUser = v.findViewById(R.id.user_recycleview);
@@ -80,14 +83,14 @@ public class ListerFragment extends Fragment {
                     // Add a divider between each row of the list
                     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
                     recyclerViewUser.addItemDecoration(dividerItemDecoration);
-            }}
+                }
+            }
 
             @Override
             public void onFailure(Throwable t) {
                 Toast.makeText(getActivity(), "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
-
 
         });
 

@@ -46,12 +46,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                             selectedFragment = new updateFragment();
                         }
 
+                        if (item.getItemId() == R.id.delete)
+                        {
+                            selectedFragment = new deleteFragment();
+                        }
+
 
 
 
                         if (selectedFragment != null)
                         {
-                            String URL="http://192.168.1.52/";
+                            String URL="http://192.168.1.52:80";
                             Bundle bundle = new Bundle();
 
                             bundle.putString("url", URL);

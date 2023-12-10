@@ -27,5 +27,5 @@ public interface ApiHandler
                            @Field("email") String email);
     @FormUrlEncoded
     @POST("webservice/delete.php")
-    Call <User> deleteUser(@Field("id") int id);
+    Call<Void> deleteUser(@Field("id") int id);
 }
