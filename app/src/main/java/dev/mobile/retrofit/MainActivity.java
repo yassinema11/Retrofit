@@ -35,12 +35,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
                         }
 
 
+                        if (item.getItemId() == R.id.list)
+                        {
+                            selectedFragment = new ListerFragment();
+                        }
+
+
+                        if (item.getItemId() == R.id.update)
+                        {
+                            selectedFragment = new updateFragment();
+                        }
+
 
 
 
                         if (selectedFragment != null)
                         {
-                            String URL="http://172.16.13.122:80/";
+                            String URL="http://192.168.1.52/";
                             Bundle bundle = new Bundle();
 
                             bundle.putString("url", URL);

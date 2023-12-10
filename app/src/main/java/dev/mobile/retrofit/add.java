@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,7 @@ public class add extends Fragment
 
     private EditText nom_add,user_add,email_add,pass_add;
     private Button BtnAdd;
+    private TextView err;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +81,7 @@ public class add extends Fragment
         email_add=v.findViewById(R.id.et_email_add);
         pass_add=v.findViewById(R.id.et_password_add);
         BtnAdd=v.findViewById(R.id.btnAddUser);
+        err=v.findViewById(R.id.error);
 
         BtnAdd.setOnClickListener(new View.OnClickListener()
         {
@@ -120,6 +123,7 @@ public class add extends Fragment
             public void onFailure (Throwable t)
             {
                 Toast.makeText(getActivity(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                err.setText(t.getLocalizedMessage());
             }
         });
     }
