@@ -80,9 +80,10 @@ public class ListerFragment extends Fragment
                     UserAdapter userAdapter = new UserAdapter(getActivity(), listUser);
                     recyclerViewUser.setAdapter(userAdapter);
 
-                    // Add a divider between each row of the list
-                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-                    recyclerViewUser.addItemDecoration(dividerItemDecoration);
+                    if(getActivity() != null) {
+                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+                        recyclerViewUser.addItemDecoration(dividerItemDecoration);
+                    }
                 }
             }
 
