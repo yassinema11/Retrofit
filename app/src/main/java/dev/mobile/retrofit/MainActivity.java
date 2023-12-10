@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-    public class MainActivity extends AppCompatActivity {
+    public class MainActivity extends AppCompatActivity
+    {
         BottomNavigationView bottomNavigationView;
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState)
+        {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 

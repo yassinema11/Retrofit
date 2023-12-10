@@ -37,7 +37,8 @@ public class ListerFragment extends Fragment
         // Required empty public constructor
     }
 
-    public static ListerFragment newInstance(String param1, String param2) {
+    public static ListerFragment newInstance(String param1, String param2)
+    {
         ListerFragment fragment = new ListerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -68,10 +69,13 @@ public class ListerFragment extends Fragment
 
         // Make a network request to get the list of users
         Call<List<User>> userListCall = api.getAllUsers();
-        userListCall.enqueue(new Callback<List<User>>() {
+        userListCall.enqueue(new Callback<List<User>>()
+        {
             @Override
-            public void onResponse(Response<List<User>> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
+            public void onResponse(Response<List<User>> response, Retrofit retrofit)
+            {
+                if (response.isSuccess())
+                {
                     List<User> listUser = response.body();
 
                     recyclerViewUser.setLayoutManager(layoutManager);
@@ -80,7 +84,8 @@ public class ListerFragment extends Fragment
                     UserAdapter userAdapter = new UserAdapter(getActivity(), listUser);
                     recyclerViewUser.setAdapter(userAdapter);
 
-                    if(getActivity() != null) {
+                    if(getActivity() != null)
+                    {
                         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
                         recyclerViewUser.addItemDecoration(dividerItemDecoration);
                     }
@@ -88,9 +93,9 @@ public class ListerFragment extends Fragment
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Throwable t)
+            {
                 Toast.makeText(getActivity(), "Error: " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
             }
 
         });
